@@ -237,7 +237,6 @@ cargarBebidas(bebidas);
 const botonCategoria = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal")
 
-console.log(botonCategoria)
 
 botonCategoria.forEach(boton => {
     boton.addEventListener("click", (e) => {
