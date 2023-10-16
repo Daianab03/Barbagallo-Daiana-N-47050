@@ -1,205 +1,31 @@
-let bebidas = [
+let bebidas = [];
 
-    // Vinos
+// Fetch + carga desde Json
 
-    {
-        id: "vino-1",
-        titulo: "Rutini",
-        imagen: "./assets/vinos/1rutini_cabmal.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 5480,
-
-    },
-    {
-        id: "vino-2",
-        titulo: "Dv Catena",
-        imagen: "./assets/vinos/2dvcatena.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 3870,
-
-    },
-    {
-        id: "vino-3",
-        titulo: "Luigi Bosca",
-        imagen: "./assets/vinos/3luigiboscas.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 9345,
-
-    },
-    {
-        id: "vino-4",
-        titulo: "Trumpeter",
-        imagen: "./assets/vinos/4trumpeter.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 3068,
-    },
-    {
-        id: "vino-5",
-        titulo: "Nicasia",
-        imagen: "./assets/vinos/5nicasia.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 3124,
-    },
-    {
-        id: "vino-6",
-        titulo: "Santa Julia",
-        imagen: "./assets/vinos/6santajulia.webp",
-        categoria: {
-            nombre: "Vinos",
-            id: "vinos",
-        },
-        precio: 1900,
-    },
+fetch("./js/bebidas.json")
+    .then(response => response.json())
+    .then(data => {
+        bebidas = data;
+        cargarBebidas(bebidas);
+    })
 
 
-    // Cervezas
 
-    {
-        id: "cerveza-1",
-        titulo: "Andes Rubia",
-        imagen: "./assets/cervezas/andesrubia.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 2700,
-    },
-    {
-        id: "cerveza-2",
-        titulo: "Corona",
-        imagen: "./assets/cervezas/corona.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 3350,
-    },
+// Elementos del DOM
 
-    {
-        id: "ceveza-3",
-        titulo: "Heineken",
-        imagen: "./assets/cervezas/heineken.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 2800,
-    },
-    {
-        id: "ceveza-4",
-        titulo: "Imperial Gold",
-        imagen: "./assets/cervezas/imperialgold.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 2400,
-    },
-    {
-        id: "ceveza-5",
-        titulo: "Patagonia",
-        imagen: "./assets/cervezas/patagoniabohemia.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 3600,
-    },
-    {
-        id: "ceveza-6",
-        titulo: "Stella",
-        imagen: "./assets/cervezas/stella.jpg",
-        categoria: {
-            nombre: "Cervezas",
-            id: "cervezas",
-        },
-        precio: 3000,
-    },
-
-    // Gins
-
-    {
-        id: "gin-1",
-        titulo: "Bombay",
-        imagen: "./assets/gin/1bombay.webp",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 10200,
-    },
-    {
-        id: "gin-2",
-        titulo: "London",
-        imagen: "./assets/gin/2london.webp",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 15300,
-    },
-    {
-        id: "gin-3",
-        titulo: "Aconcagua",
-        imagen: "./assets/gin/3aconcagua.webp",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 6780,
-    },
-    {
-        id: "gin-4",
-        titulo: "Sevilla",
-        imagen: "./assets/gin/4sevilla.jpg",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 9784,
-    },
-    {
-        id: "gin-5",
-        titulo: "Beefeter",
-        imagen: "./assets/gin/5beefeter.jpg",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 19243,
-    },
-    {
-        id: "gin-6",
-        titulo: "Gordon",
-        imagen: "./assets/gin/6gordon.jpg",
-        categoria: {
-            nombre: "Gins",
-            id: "gins",
-        },
-        precio: 3093,
-    },
-];
+const contenedorBebidas = document.querySelector("#gridBebidas");
+const botonCategoria = document.querySelectorAll(".boton-categoria");
+const tituloPrincipal = document.querySelector("#titulo-principal");
+let botonAgregar = document.querySelectorAll(".btn-agregar");
+const contador = document.querySelector("#contador");
+const contenedorCarrito = document.getElementById("modalShop-container");
+const btnVaciarCarrito = document.querySelector(".clearShop");
+const iconoCarrito = document.querySelector(".carrito-icon");
+const modalCarrito = document.getElementById("modalCarrito");
+const btnCerrarCarrito = document.querySelector(".btnClose");
 
 
 // Cargar Bebidas
-
-const contenedorBebidas = document.querySelector("#gridBebidas");
-let botonAgregar = document.querySelectorAll(".btn-agregar");
 
 function cargarBebidas(bebidasSelec) {
 
@@ -228,17 +54,10 @@ function cargarBebidas(bebidasSelec) {
 
     actualizarbotonAgregar();
 
-
 }
-
-cargarBebidas(bebidas);
 
 
 // Cargar bebidas por categoria
-
-const botonCategoria = document.querySelectorAll(".boton-categoria");
-const tituloPrincipal = document.querySelector("#titulo-principal")
-
 
 botonCategoria.forEach(boton => {
     boton.addEventListener("click", (e) => {
@@ -262,6 +81,7 @@ botonCategoria.forEach(boton => {
 
 });
 
+
 function actualizarbotonAgregar() {
     botonAgregar = document.querySelectorAll(".btn-agregar");
 
@@ -273,9 +93,7 @@ function actualizarbotonAgregar() {
 
 // Agregar Bebidas
 
-const contador = document.querySelector("#contador");
 let bebidasEnCarrito;
-
 let bebidasEnCarritolS = localStorage.getItem("bebidas_en_carrito");
 
 if (bebidasEnCarritolS) {
@@ -289,7 +107,7 @@ if (bebidasEnCarritolS) {
 function agregarAlCarrito(e) {
     const idBoton = e.currentTarget.id;
     const bebidaAgregada = bebidas.find(bebida => bebida.id === idBoton);
-   
+
     if (bebidasEnCarrito.some(bebida => bebida.id === idBoton)) {
         const inicio = bebidasEnCarrito.findIndex(bebida => bebida.id === idBoton);
         bebidasEnCarrito[inicio].cantidad++;
@@ -297,21 +115,47 @@ function agregarAlCarrito(e) {
         bebidaAgregada.cantidad = 1;
         bebidasEnCarrito.push(bebidaAgregada);
     }
-   
+
     actualizarContador();
+
     localStorage.setItem("bebidas_en_carrito", JSON.stringify(bebidasEnCarrito));
     mostrarCarrito();
-}
 
+
+    // Alert de bebida agregada
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Bebida agregada'
+    })
+
+}
 
 
 
 // Carrito
 
-// Contenedor del carrito
-const contenedorCarrito = document.getElementById("modalShop-container");
+// Cargar bebidas en el carrito después de recuperar datos del LS
+
+window.addEventListener("load", () => {
+    mostrarCarrito();
+    actualizarContador();
+});
 
 // Mostrar los bebidas en el carrito
+
 function mostrarCarrito() {
     contenedorCarrito.innerHTML = "";
     bebidasEnCarrito.forEach(bebida => {
@@ -330,11 +174,11 @@ function mostrarCarrito() {
         contenedorCarrito.appendChild(div);
     });
 
-    // Calcular y mostrar el total del carrito
+    // Calcular y mostrar el total de bebidas en el carrito
     const divTotal = document.querySelector(".divTotal");
     const totalElement = document.querySelector(".total");
 
-    // Verificar si hay elementos en el carrito
+    // Verificar si hay bebidas en el carrito
     if (bebidasEnCarrito.length > 0) {
         divTotal.innerText = "Total:";
         const total = bebidasEnCarrito.reduce((acc, bebida) => acc + bebida.cantidad * bebida.precio, 0);
@@ -345,7 +189,8 @@ function mostrarCarrito() {
     }
 }
 
-// Eliminar bebidas del carrito 
+// Eliminar bebidas del carrito
+
 contenedorCarrito.addEventListener("click", (e) => {
     if (e.target.classList.contains("delItem")) {
         const idBebidaAEliminar = e.target.id;
@@ -360,38 +205,126 @@ contenedorCarrito.addEventListener("click", (e) => {
         mostrarCarrito();
         localStorage.setItem("bebidas_en_carrito", JSON.stringify(bebidasEnCarrito));
         actualizarContador();
+
+
+        // Alert de bebida eliminada
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Bebida eliminada'
+        })
     }
 });
 
-// Vaciar completamente el carrito
-const btnVaciarCarrito = document.querySelector(".clearShop");
+
+// Vaciar completamente las bebidas del carrito + Alert
 
 btnVaciarCarrito.addEventListener("click", () => {
-    bebidasEnCarrito = [];
-    mostrarCarrito();
-    localStorage.removeItem("bebidas_en_carrito");
-    modalCarrito.style.display = "none";
-    actualizarContador();
+    if (bebidasEnCarrito.length !== 0) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, vaciar carrito!'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                // Vaciar el carrito y actualizar el DOM
+                bebidasEnCarrito.length = 0;
+                localStorage.removeItem("bebidas_en_carrito");
+                modalCarrito.style.display = "none";
+                mostrarCarrito();
+                actualizarContador();
+                
+                // Mostrar mensaje de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Carrito Vacío!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    } else {
+
+        // Si no hay bebidas en el carrito
+        Swal.fire({
+            icon: 'warning',
+            title: 'No hay bebidas seleccionadas!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
 });
+
+// Realizar compra de las bebidas del carrito + Alert
 
 const btnPay = document.querySelector(".btnPay");
 btnPay.addEventListener("click", finalizarCompra);
-function finalizarCompra() {
-    bebidasEnCarrito = [];
-    mostrarCarrito();
-    
-    localStorage.removeItem("bebidas_en_carrito");
 
-    modalCarrito.style.display = "none";
+async function finalizarCompra() {
+    if (bebidasEnCarrito.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No hay bebidas seleccionadas!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else {
+        const { value: email } = await Swal.fire({
+            title: 'Ingrese su correo electrónico:',
+            input: 'email',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Si, comprar!',
+            confirmButtonColor: '#3085d6',
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: '#d33',
+            showLoaderOnConfirm: true,
+            preConfirm: (email) => {
+                return email;
+            },
 
-    actualizarContador();
+            allowOutsideClick: () => !Swal.isLoading()
+        });
+
+        if (email) {
+            Swal.fire(`${email}`);
+
+            // Mensaje de compra exitosa + enlace de pago
+            Swal.fire({
+                title: 'Revisa tu casilla de email. <br> <br> Te hemos enviado un link de pago. <br> <br> Una vez realizado el mismo, podrás disfrutar de tus bebidas. 😉',
+                icon: 'success'
+            }).then(() => {
+                // Vaciar el carrito y actualizar el DOM
+                bebidasEnCarrito = [];
+                mostrarCarrito();
+                localStorage.removeItem("bebidas_en_carrito");
+                modalCarrito.style.display = "none";
+                actualizarContador();
+            });
+        }
+    }
 }
 
-
-// Obtener ícono y contenedor del carrito desde el HTML
-const iconoCarrito = document.querySelector(".carrito-icon");
-const modalCarrito = document.getElementById("modalCarrito");
-const btnCerrarCarrito = document.querySelector(".btnClose");
 
 // Abrir el carrito
 iconoCarrito.addEventListener("click", () => {
